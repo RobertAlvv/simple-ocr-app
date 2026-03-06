@@ -1,0 +1,26 @@
+{
+    "java.configuration.updateBuildConfiguration": "disabled",
+    "dart.flutterSdkPath": ".fvm/flutter_sdk",
+    "dart.flutterSdkPaths": [
+        "/Users/$USER/fvm/versions"
+    ],
+    // Remove .fvm files from search
+    "search.exclude": {
+        "**/.fvm": true
+    },
+    // Remove from file watching
+    "files.watcherExclude": {
+        "**/.fvm": true
+    },
+    "commentTranslate.hover.enabled": false,
+    "dart.useLegacyAnalyzerProtocol": true,
+    "editor.formatOnSave": true,
+    "dart.lineLength": 80,
+    "files.exclude": {
+        "**/build/": true,
+        "**/.fvm/": true
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit"
+    },
+}

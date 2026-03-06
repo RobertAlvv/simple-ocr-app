@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "flutter-scalable-app": {
+      "source": "RobertAlvv/flutter-skills",
+      "sourceType": "github",
+      "computedHash": "f6e1d3e86472bdb829361f8f5f8ae36a49390a191317f1098aaaa7614c78f44f"
+    }
+  }
+}

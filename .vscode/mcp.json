@@ -1,0 +1,20 @@
+{
+    "mcpServers": {
+        "dart-flutter": {
+            "command": "dart",
+            "args": [
+                "mcp-server"
+            ]
+        },
+        "stitch": {
+            "command": "npx",
+            "args": [
+                "@_davideast/stitch-mcp",
+                "proxy"
+            ],
+            "env": {
+                "STITCH_API_KEY": "AQ.Ab8RN6JcnPEpk-2CKRpJSuErpfOpTGbmWOjR4wvyf68MbrHzsw"
+            }
+        }
+    }
+}
