@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../core/error/failures.dart';
 import '../../domain/entity/invoice_entity.dart';
 import '../../domain/use_case/get_invoice_use_case.dart';
 import '../../domain/use_case/process_image_use_case.dart';
@@ -27,6 +28,15 @@ class InvoiceBloc extends Bloc<InvoiceEvent, InvoiceState> {
     on<GetInvoiceDetail>(_onGetInvoiceDetail);
   }
 
+  /// Maps a domain [Failure] to an [ErrorKind] for the presentation layer.
+  static ErrorKind _kindFromFailure(Failure failure) => switch (failure) {
+    NetworkFailure() => ErrorKind.network,
+    TimeoutFailure() => ErrorKind.timeout,
+    ServerFailure() => ErrorKind.server,
+    OcrFailure() => ErrorKind.ocr,
+    _ => ErrorKind.unknown,
+  };
+
   Future<void> _onProcessImage(
     ProcessImage event,
     Emitter<InvoiceState> emit,
@@ -34,7 +44,9 @@ class InvoiceBloc extends Bloc<InvoiceEvent, InvoiceState> {
     emit(const InvoiceState.loading());
     final result = await _processImageUseCase(event.imagePath);
     result.fold(
-      (failure) => emit(InvoiceState.error(failure.message)),
+      (failure) => emit(
+        InvoiceState.error(failure.message, kind: _kindFromFailure(failure)),
+      ),
       (invoice) => emit(InvoiceState.loaded(invoice)),
     );
   }
@@ -46,7 +58,9 @@ class InvoiceBloc extends Bloc<InvoiceEvent, InvoiceState> {
     emit(const InvoiceState.loading());
     final result = await _saveInvoiceUseCase(event.invoice);
     result.fold(
-      (failure) => emit(InvoiceState.error(failure.message)),
+      (failure) => emit(
+        InvoiceState.error(failure.message, kind: _kindFromFailure(failure)),
+      ),
       (_) => emit(const InvoiceState.success('Factura guardada correctamente')),
     );
   }
@@ -58,7 +72,9 @@ class InvoiceBloc extends Bloc<InvoiceEvent, InvoiceState> {
     emit(const InvoiceState.loading());
     final result = await _getInvoiceUseCase(event.id);
     result.fold(
-      (failure) => emit(InvoiceState.error(failure.message)),
+      (failure) => emit(
+        InvoiceState.error(failure.message, kind: _kindFromFailure(failure)),
+      ),
       (invoice) => emit(InvoiceState.loaded(invoice)),
     );
   }

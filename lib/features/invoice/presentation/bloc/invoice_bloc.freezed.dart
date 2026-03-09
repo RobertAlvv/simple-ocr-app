@@ -535,7 +535,7 @@ mixin _$InvoiceState {
     required TResult Function() loading,
     required TResult Function(InvoiceEntity invoice) loaded,
     required TResult Function(String? message) success,
-    required TResult Function(String message) error,
+    required TResult Function(String message, ErrorKind kind) error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
@@ -543,7 +543,7 @@ mixin _$InvoiceState {
     TResult? Function()? loading,
     TResult? Function(InvoiceEntity invoice)? loaded,
     TResult? Function(String? message)? success,
-    TResult? Function(String message)? error,
+    TResult? Function(String message, ErrorKind kind)? error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
@@ -551,7 +551,7 @@ mixin _$InvoiceState {
     TResult Function()? loading,
     TResult Function(InvoiceEntity invoice)? loaded,
     TResult Function(String? message)? success,
-    TResult Function(String message)? error,
+    TResult Function(String message, ErrorKind kind)? error,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -650,7 +650,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loading,
     required TResult Function(InvoiceEntity invoice) loaded,
     required TResult Function(String? message) success,
-    required TResult Function(String message) error,
+    required TResult Function(String message, ErrorKind kind) error,
   }) {
     return initial();
   }
@@ -662,7 +662,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? loading,
     TResult? Function(InvoiceEntity invoice)? loaded,
     TResult? Function(String? message)? success,
-    TResult? Function(String message)? error,
+    TResult? Function(String message, ErrorKind kind)? error,
   }) {
     return initial?.call();
   }
@@ -674,7 +674,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? loading,
     TResult Function(InvoiceEntity invoice)? loaded,
     TResult Function(String? message)? success,
-    TResult Function(String message)? error,
+    TResult Function(String message, ErrorKind kind)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -775,7 +775,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() loading,
     required TResult Function(InvoiceEntity invoice) loaded,
     required TResult Function(String? message) success,
-    required TResult Function(String message) error,
+    required TResult Function(String message, ErrorKind kind) error,
   }) {
     return loading();
   }
@@ -787,7 +787,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? loading,
     TResult? Function(InvoiceEntity invoice)? loaded,
     TResult? Function(String? message)? success,
-    TResult? Function(String message)? error,
+    TResult? Function(String message, ErrorKind kind)? error,
   }) {
     return loading?.call();
   }
@@ -799,7 +799,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? loading,
     TResult Function(InvoiceEntity invoice)? loaded,
     TResult Function(String? message)? success,
-    TResult Function(String message)? error,
+    TResult Function(String message, ErrorKind kind)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -927,7 +927,7 @@ class _$LoadedImpl implements _Loaded {
     required TResult Function() loading,
     required TResult Function(InvoiceEntity invoice) loaded,
     required TResult Function(String? message) success,
-    required TResult Function(String message) error,
+    required TResult Function(String message, ErrorKind kind) error,
   }) {
     return loaded(invoice);
   }
@@ -939,7 +939,7 @@ class _$LoadedImpl implements _Loaded {
     TResult? Function()? loading,
     TResult? Function(InvoiceEntity invoice)? loaded,
     TResult? Function(String? message)? success,
-    TResult? Function(String message)? error,
+    TResult? Function(String message, ErrorKind kind)? error,
   }) {
     return loaded?.call(invoice);
   }
@@ -951,7 +951,7 @@ class _$LoadedImpl implements _Loaded {
     TResult Function()? loading,
     TResult Function(InvoiceEntity invoice)? loaded,
     TResult Function(String? message)? success,
-    TResult Function(String message)? error,
+    TResult Function(String message, ErrorKind kind)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -1087,7 +1087,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function() loading,
     required TResult Function(InvoiceEntity invoice) loaded,
     required TResult Function(String? message) success,
-    required TResult Function(String message) error,
+    required TResult Function(String message, ErrorKind kind) error,
   }) {
     return success(message);
   }
@@ -1099,7 +1099,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function()? loading,
     TResult? Function(InvoiceEntity invoice)? loaded,
     TResult? Function(String? message)? success,
-    TResult? Function(String message)? error,
+    TResult? Function(String message, ErrorKind kind)? error,
   }) {
     return success?.call(message);
   }
@@ -1111,7 +1111,7 @@ class _$SuccessImpl implements _Success {
     TResult Function()? loading,
     TResult Function(InvoiceEntity invoice)? loaded,
     TResult Function(String? message)? success,
-    TResult Function(String message)? error,
+    TResult Function(String message, ErrorKind kind)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -1180,7 +1180,7 @@ abstract class _$$ErrorImplCopyWith<$Res> {
     $Res Function(_$ErrorImpl) then,
   ) = __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String message});
+  $Res call({String message, ErrorKind kind});
 }
 
 /// @nodoc
@@ -1196,13 +1196,17 @@ class __$$ErrorImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? message = null}) {
+  $Res call({Object? message = null, Object? kind = null}) {
     return _then(
       _$ErrorImpl(
         null == message
             ? _value.message
             : message // ignore: cast_nullable_to_non_nullable
                   as String,
+        kind: null == kind
+            ? _value.kind
+            : kind // ignore: cast_nullable_to_non_nullable
+                  as ErrorKind,
       ),
     );
   }
@@ -1211,14 +1215,17 @@ class __$$ErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ErrorImpl implements _Error {
-  const _$ErrorImpl(this.message);
+  const _$ErrorImpl(this.message, {this.kind = ErrorKind.unknown});
 
   @override
   final String message;
+  @override
+  @JsonKey()
+  final ErrorKind kind;
 
   @override
   String toString() {
-    return 'InvoiceState.error(message: $message)';
+    return 'InvoiceState.error(message: $message, kind: $kind)';
   }
 
   @override
@@ -1226,11 +1233,12 @@ class _$ErrorImpl implements _Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ErrorImpl &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.kind, kind) || other.kind == kind));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, message, kind);
 
   /// Create a copy of InvoiceState
   /// with the given fields replaced by the non-null parameter values.
@@ -1247,9 +1255,9 @@ class _$ErrorImpl implements _Error {
     required TResult Function() loading,
     required TResult Function(InvoiceEntity invoice) loaded,
     required TResult Function(String? message) success,
-    required TResult Function(String message) error,
+    required TResult Function(String message, ErrorKind kind) error,
   }) {
-    return error(message);
+    return error(message, kind);
   }
 
   @override
@@ -1259,9 +1267,9 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? loading,
     TResult? Function(InvoiceEntity invoice)? loaded,
     TResult? Function(String? message)? success,
-    TResult? Function(String message)? error,
+    TResult? Function(String message, ErrorKind kind)? error,
   }) {
-    return error?.call(message);
+    return error?.call(message, kind);
   }
 
   @override
@@ -1271,11 +1279,11 @@ class _$ErrorImpl implements _Error {
     TResult Function()? loading,
     TResult Function(InvoiceEntity invoice)? loaded,
     TResult Function(String? message)? success,
-    TResult Function(String message)? error,
+    TResult Function(String message, ErrorKind kind)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(message);
+      return error(message, kind);
     }
     return orElse();
   }
@@ -1322,9 +1330,11 @@ class _$ErrorImpl implements _Error {
 }
 
 abstract class _Error implements InvoiceState {
-  const factory _Error(final String message) = _$ErrorImpl;
+  const factory _Error(final String message, {final ErrorKind kind}) =
+      _$ErrorImpl;
 
   String get message;
+  ErrorKind get kind;
 
   /// Create a copy of InvoiceState
   /// with the given fields replaced by the non-null parameter values.
