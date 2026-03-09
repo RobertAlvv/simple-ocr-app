@@ -49,5 +49,10 @@
 	<string>Necesitamos acceso a la cámara para escanear facturas.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Necesitamos acceso a la galería para seleccionar imágenes de recibos.</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>
