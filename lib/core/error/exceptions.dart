@@ -12,7 +12,11 @@ class ServerException implements Exception {
 }
 
 class NetworkException implements Exception {
-  const NetworkException();
+  final String? message;
+  const NetworkException([this.message]);
+
+  @override
+  String toString() => 'NetworkException(message: $message)';
 }
 
 class CacheException implements Exception {

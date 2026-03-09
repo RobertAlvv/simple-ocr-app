@@ -19,16 +19,35 @@ class InvoiceDatasourceImpl implements InvoiceDatasource {
     // Simulating OCR processing delay (longer since it's "AI")
     await Future.delayed(const Duration(milliseconds: 2500));
 
-    // Fake extracted data
+    // Fake extracted data simulating v2 enriched response
     return InvoiceModel(
       id: _uuid.v4(),
       imagePath: imagePath,
       merchantName: 'Mock Merchant Cafe',
-      amount: 45.50,
+      supplier: 'Mock Merchant Cafe',
+      rnc: '101234567',
+      rncValid: true,
+      amount: 1770.00,
+      subtotal: 1500.00,
+      tax: 270.00,
+      total: 1770.00,
       date: DateTime.now().subtract(const Duration(days: 1)),
       category: 'Alimentos',
       confidence: 0.92,
       status: 'Pending',
+      numeroComprobante: 'B0100000001',
+      fieldConfidences: const {
+        'proveedor': 0.92,
+        'rnc': 0.95,
+        'fecha': 0.88,
+        'subtotal': 0.90,
+        'impuesto': 0.90,
+        'total': 0.93,
+        'numero_comprobante': 0.85,
+      },
+      extractionWarnings: const [],
+      ocrConfidenceAvg: 0.92,
+      processingTimeMs: 1250.0,
     );
   }
 

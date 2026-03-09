@@ -49,6 +49,8 @@ import '../../features/home/domain/use_case/get_dashboard_data_use_case.dart'
 import '../../features/home/presentation/bloc/home_bloc.dart' as _i202;
 import '../../features/invoice/data/datasource/invoice_datasource.dart'
     as _i939;
+import '../../features/invoice/data/datasource/invoice_remote_datasource.dart'
+    as _i434;
 import '../../features/invoice/data/repository_impl/invoice_repository_impl.dart'
     as _i996;
 import '../../features/invoice/domain/repository/invoice_repository.dart'
@@ -82,6 +84,9 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final appModule = _$AppModule();
     gh.lazySingleton<_i81.AppRouter>(() => appModule.router);
+    gh.lazySingleton<_i434.InvoiceRemoteDatasource>(
+      () => _i434.InvoiceRemoteDatasourceImpl(),
+    );
     gh.lazySingleton<_i43.AuthDatasource>(() => _i43.AuthDatasourceImpl());
     gh.lazySingleton<_i365.ExpenseDatasource>(
       () => _i365.ExpenseDatasourceImpl(),
@@ -139,7 +144,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i202.HomeBloc(gh<_i73.GetDashboardDataUseCase>()),
     );
     gh.lazySingleton<_i12.InvoiceRepository>(
-      () => _i996.InvoiceRepositoryImpl(gh<_i939.InvoiceDatasource>()),
+      () => _i996.InvoiceRepositoryImpl(
+        gh<_i939.InvoiceDatasource>(),
+        gh<_i434.InvoiceRemoteDatasource>(),
+      ),
     );
     gh.factory<_i395.GetExpensesUseCase>(
       () => _i395.GetExpensesUseCase(gh<_i495.ExpenseRepository>()),
